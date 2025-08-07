@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: order-route
+        uri: lb://service-order
+        predicates:
+        - Path=/api/order/**
+        filters:
+        - StripPrefix=2
+      - id: product-route
+        uri: lb://service-product
+        predicates:
+        - Path=/api/product/**
+        filters:
+        - StripPrefix=2

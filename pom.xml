@@ -16,6 +16,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>services</module>
+		<module>gateway</module>
 	</modules>
 
 
@@ -42,6 +43,12 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<dependencies>
+		 <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>

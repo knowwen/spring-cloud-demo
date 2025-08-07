@@ -4,10 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OrderMainApplication {
-
+public class GatewayMainApplication {
     public static void main(String[] args) {
-        SpringApplication.run(OrderMainApplication.class, args);
+        SpringApplication.run(GatewayMainApplication.class, args);
     }
-
 }
