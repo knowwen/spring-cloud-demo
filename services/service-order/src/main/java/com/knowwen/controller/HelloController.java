@@ -7,14 +7,14 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RefreshScope
+// @RefreshScope
 @RestController
 public class HelloController {
 
-    @Value("${order.timeout}")
+    @Value("${order.timeout:30m}")
     String orderTimeout;
 
-    @Value("${order.auto-confirm}")
+    @Value("${order.auto-confirm:60m}")
     String orderAutoConfirm;
 
     @Autowired
@@ -27,7 +27,9 @@ public class HelloController {
 
     @GetMapping("config/hello")
     public String getHelloConfig(){
-        return helloProperties.getHello();
+        return "hello="+helloProperties.getHello()+","
+        + "dbUrl="+helloProperties.getDbUrl()
+        ;
     }
 
     @GetMapping("/")

@@ -8,7 +8,7 @@ public class MainTest {
 
     public static void testShort(){
         short s = 1;
-        s = s + 1;
+        // s = s + 1;
         s += 1;
     }
 

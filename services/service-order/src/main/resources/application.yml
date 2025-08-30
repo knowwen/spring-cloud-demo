@@ -1,0 +1,40 @@
+server:
+  port: 8000
+spring:
+  profiles:
+    active: test
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        namespace: ${spring.profiles.active}
+---
+spring:
+  config:
+    import:
+    - nacos:db.yml
+    - nacos:common.yml
+    activate:
+      on-profile:
+      - dev
+---
+spring:
+  config:
+    import:
+    - nacos:db.yml
+    - nacos:common.yml
+    - nacos:test.yml
+    activate:
+      on-profile:
+      - test
+---
+spring:
+  config:
+    import:
+    - nacos:db.yml
+    - nacos:common.yml
+    activate:
+      on-profile:
+      - prod

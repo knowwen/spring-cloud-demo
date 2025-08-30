@@ -9,4 +9,6 @@ import org.springframework.stereotype.Component;
 @Data
 public class HelloProperties {
     String hello;
+    String dbUrl;
+    
 }
