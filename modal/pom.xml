@@ -9,21 +9,18 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.knowwen</groupId>
     <artifactId>modal</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>annotationProcessor</scope>
         </dependency>
     </dependencies>
-
 </project>

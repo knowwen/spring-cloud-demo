@@ -1,5 +1,8 @@
 package com.knowwen.product.bean;
 
-public class Product {
+import lombok.Data;
 
+@Data
+public class Product {
+    private Long id;
 }

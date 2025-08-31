@@ -1,12 +1,12 @@
 package com.knowwen.service.impl;
 
-import org.springframework.stereotype.Service;
-
 import com.knowwen.order.bean.Order;
 import com.knowwen.service.OrderService;
+import org.springframework.stereotype.Service;
+
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order createOrder(Long userId, Long productId) {

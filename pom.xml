@@ -15,10 +15,10 @@
 	<description>Demo project for Spring Boot</description>
 	<packaging>pom</packaging>
 	<modules>
-		<module>services</module>
-		<module>gateway</module>
-		<module>modal</module>
-	</modules>
+        <module>gateway</module>
+        <module>services</module>
+        <module>modal</module>
+    </modules>
 
 
 	<properties>
@@ -50,13 +50,5 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>

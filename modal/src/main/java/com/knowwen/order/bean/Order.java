@@ -1,5 +1,8 @@
 package com.knowwen.order.bean;
 
-public class Order {
+import lombok.Data;
 
+@Data
+public class Order {
+    private Long id;
 }
