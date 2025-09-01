@@ -2,13 +2,15 @@ server:
   port: 8000
 spring:
   profiles:
-    active: test
+    active: dev
   application:
     name: service-order
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
       config:
+        namespace: ${spring.profiles.active}
+      discovery:
         namespace: ${spring.profiles.active}
 ---
 spring:
