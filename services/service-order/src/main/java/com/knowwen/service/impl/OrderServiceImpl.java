@@ -1,5 +1,6 @@
 package com.knowwen.service.impl;
 
+import com.knowwen.feign.ProductFeign;
 import com.knowwen.order.bean.Order;
 import com.knowwen.product.bean.Product;
 import com.knowwen.service.OrderService;
@@ -29,11 +30,14 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     LoadBalancerClient loadBalancerClient;
 
+    @Autowired
+    private ProductFeign productFeign;
+
     @Override
     public Order createOrder(Long userId, Long productId) {
         Order order = new Order();
 
-        Product product = getProductFromRemoteWithLoadBalancerAnnotation(productId);
+        Product product = productFeign.getProduct(productId);
 
         order.setUserId(userId);
         order.setId(10);
