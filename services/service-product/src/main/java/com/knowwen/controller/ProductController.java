@@ -3,6 +3,7 @@ package com.knowwen.controller;
 import com.knowwen.product.bean.Product;
 import com.knowwen.service.ProductService;
 
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
