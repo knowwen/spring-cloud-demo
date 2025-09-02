@@ -3,6 +3,8 @@ server:
 spring:
   profiles:
     active: dev
+    include:
+    - feign
   application:
     name: service-order
   cloud:
@@ -12,6 +14,10 @@ spring:
         namespace: ${spring.profiles.active}
       discovery:
         namespace: ${spring.profiles.active}
+logging:
+  level:
+    com.knowwen.feign: debug
+    
 ---
 spring:
   config:
