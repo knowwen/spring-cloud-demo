@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 import feign.Logger;
+import feign.Retryer;
 
 @Configuration
 public class OrderConfig {
@@ -21,6 +22,11 @@ public class OrderConfig {
     Logger.Level feignLoggerLevel(){
         return Logger.Level.FULL;
     }
+
+    @Bean
+    Retryer retryer(){
+        return new Retryer.Default();   
+    }   
 
 
 }

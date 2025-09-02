@@ -16,11 +16,11 @@ public class ProductServiceImpl implements ProductService {
         product.setNum(2);
         product.setPrice(new BigDecimal(10));
         product.setProductName("苹果-" + productId);
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // try {
+        //     TimeUnit.SECONDS.sleep(10);
+        // } catch (InterruptedException e) {
+        //     e.printStackTrace();
+        // }
         return product;
     }
 }
