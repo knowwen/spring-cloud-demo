@@ -8,9 +8,16 @@ spring:
         - Path=/api/order/**
         filters:
         - StripPrefix=2
+        - TokenRelay
       - id: product-route
         uri: lb://service-product
         predicates:
         - Path=/api/product/**
+        filters:
+        - StripPrefix=2
+      - id: oauth2-route
+        uri: lb://service-oauth2
+        predicates:
+        - Path=/api/oauth2/**
         filters:
         - StripPrefix=2

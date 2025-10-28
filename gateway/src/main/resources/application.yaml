@@ -5,6 +5,33 @@ spring:
     active: dev
   application:
     name: gateway
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080
+      client:
+        registration:
+          gateway: # 自定义客户端标识（需与授权服务器配置一致）
+            provider: spring
+            client-id: oidc-client # 授权服务器分配的客户端ID
+            client-secret: secret # 授权服务器分配的客户端密钥
+            authorization-grant-type: authorization_code # 授权模式（授权码模式）
+            redirect-uri: "http://127.0.0.1/login/oauth2/code/gateway" # 回调地址（网关接收授权码）
+            # redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: 
+            - openid # OIDC 标准请求的权限范围
+            - profile
+            - user # 申请的权限范围（需授权服务器支持）
+        provider:
+          spring: # 对应上面的客户端标识，配置授权服务器地址
+            issuer-uri: http://localhost:8080
+            # authorization-uri: http://localhost:8080/oauth2/authorize # 授权服务器的授权地址
+            # token-uri: http://localhost:8080/oauth2/token # 授权服务器的 Token 获取地址
+            # user-info-uri: http://localhost:8080/user # 授权服务器的用户信息地址
+            jwk-set-uri: http://localhost:8080/oauth2/jwks
+            # user-name-attribute: username # 用户信息中“用户名”字段的key
+            
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
