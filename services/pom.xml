@@ -15,6 +15,7 @@
     <modules>
         <module>service-product</module>
         <module>service-order</module>
+        <module>service-oauth2</module>
     </modules>
     
     <properties>
@@ -51,6 +52,12 @@
             <artifactId>modal</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <!-- <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+            <version>3.5.14</version>
+        </dependency> -->
 
     </dependencies>
 </project>
