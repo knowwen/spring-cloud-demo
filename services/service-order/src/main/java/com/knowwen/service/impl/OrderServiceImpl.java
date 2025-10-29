@@ -1,10 +1,14 @@
 package com.knowwen.service.impl;
 
+import com.knowwen.feign.AccountClient;
 import com.knowwen.feign.ProductFeign;
+import com.knowwen.mapper.OrdersMapper;
 import com.knowwen.order.bean.Order;
 import com.knowwen.product.bean.Product;
 import com.knowwen.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
+
+import org.apache.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -32,6 +36,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductFeign productFeign;
+
+
+    @Autowired
+    private OrdersMapper ordersMapper;
+
+    @Autowired
+    private AccountClient accountClient;
 
     @Override
     public Order createOrder(Long userId, Long productId) {
@@ -69,6 +80,15 @@ public class OrderServiceImpl implements OrderService {
         log.info("url:{}",url);
         Product product = restTemplate.getForObject(url, Product.class);
         return product;
+    }
+
+    @GlobalTransactional
+    @Override
+    public void create(Long userId, Long productId, Integer count) {
+        ordersMapper.insertOrder(userId, productId, count);
+        accountClient.decrease(userId, count*100);
+        if(count==2) 
+            throw new RuntimeException("测试异常，触发分布式回滚");
     }
 
 }

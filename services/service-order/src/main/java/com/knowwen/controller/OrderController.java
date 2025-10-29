@@ -20,4 +20,11 @@ public class OrderController {
         return order;
     }
 
+    @GetMapping("order")
+    public String create(@RequestParam Long userId, @RequestParam Long productId, @RequestParam Integer count){
+        orderService.create(userId,productId,count);
+        return "创建订单成功";
+    }
+
+
 }

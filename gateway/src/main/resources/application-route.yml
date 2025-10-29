@@ -2,6 +2,13 @@ spring:
   cloud:
     gateway:
       routes:
+      - id: account-route
+        uri: lb://service-account
+        predicates:
+        - Path=/api/account/**
+        filters:
+        - StripPrefix=2
+        - TokenRelay
       - id: order-route
         uri: lb://service-order
         predicates:

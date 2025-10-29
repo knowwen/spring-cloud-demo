@@ -1,12 +1,10 @@
 server:
-  port: 8000
+  port: 8010
 spring:
   profiles:
     active: dev
-    include:
-    - feign
   application:
-    name: service-order
+    name: service-account
   security:
     oauth2:
       resourceserver:
@@ -19,17 +17,13 @@ spring:
         namespace: ${spring.profiles.active}
       discovery:
         namespace: ${spring.profiles.active}
-logging:
-  level:
-    com.knowwen.feign: debug
-    
 ---
 spring:
   config:
     import:
     - nacos:db.yml
     - nacos:common.yml
-    - nacos:db-order.yml
+    - nacos:db-account.yml
     activate:
       on-profile:
       - dev

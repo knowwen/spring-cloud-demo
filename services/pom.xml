@@ -16,6 +16,7 @@
         <module>service-product</module>
         <module>service-order</module>
         <module>service-oauth2</module>
+        <module>service-account</module>
     </modules>
     
     <properties>
