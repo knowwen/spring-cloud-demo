@@ -20,8 +20,8 @@ spring:
         client:
           gateway:
             registration:
-              client-id: "oidc-client"
-              client-secret: "{noop}secret"
+              client-id: "gateway"
+              client-secret: "$2a$10$0r0iJ8KXXKLU69fJxpNXf.vT.gwNJmlTXQQgn5fqCogmsq58M4eke"
               client-authentication-methods:
                 - "client_secret_post"
                 - "client_secret_basic"
@@ -41,7 +41,32 @@ spring:
     nacos:
       server-addr: 127.0.0.1:8848
       config:
-        import-check:
-          enabled: false
+        namespace: ${spring.profiles.active}
       discovery:
         namespace: ${spring.profiles.active}
+
+---
+spring:
+  config:
+    import:
+      # - nacos:db.yml
+      - nacos:service-oauth2-db.yml
+    activate:
+      on-profile:
+        - dev
+---
+spring:
+  config:
+    import:
+      - nacos:db.yml
+    activate:
+      on-profile:
+        - test
+---
+spring:
+  config:
+    import:
+      - nacos:db.yml
+    activate:
+      on-profile:
+        - prod

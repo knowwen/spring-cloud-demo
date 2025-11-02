@@ -14,10 +14,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>service-product</module>
-        <module>service-order</module>
+        <module>service-discovery-test</module>
         <module>service-oauth2</module>
         <module>service-account</module>
         <module>service-sharding</module>
+        <module>service-order</module>
     </modules>
     
     <properties>

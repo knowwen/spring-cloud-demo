@@ -1,10 +1,12 @@
 package com.knowwen.oauth2.config;
 
+import com.knowwen.oauth2.service.UserService;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -17,6 +19,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -47,6 +51,14 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableWebSecurity // 开启 Spring Security 基础功能
 public class AuthServerConfig {
+
+    @Autowired
+    private UserService userService;
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
     // @Bean 
 	// @Order(1)
@@ -88,17 +100,17 @@ public class AuthServerConfig {
 	// 	return http.build();
 	// }
 
-	@Bean 
-	public UserDetailsService userDetailsService() {
-		UserDetails userDetails = User.withDefaultPasswordEncoder()
-				.username("user")
-				.password("password")
-				.roles("USER")
-				.authorities("profile","openid","user")
-				.build();
-
-		return new InMemoryUserDetailsManager(userDetails);
-	}
+//	@Bean
+//	public UserDetailsService userDetailsService() {
+//		UserDetails userDetails = User.withDefaultPasswordEncoder()
+//				.username("user")
+//				.password("password")
+//				.roles("USER")
+//				.authorities("profile","openid","user")
+//				.build();
+//
+//		return new InMemoryUserDetailsManager(userDetails);
+//	}
 
 	// @Bean
 	// public OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService() {

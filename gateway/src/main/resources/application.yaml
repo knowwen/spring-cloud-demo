@@ -14,7 +14,7 @@ spring:
         registration:
           gateway: # 自定义客户端标识（需与授权服务器配置一致）
             provider: spring
-            client-id: oidc-client # 授权服务器分配的客户端ID
+            client-id: gateway # 授权服务器分配的客户端ID
             client-secret: secret # 授权服务器分配的客户端密钥
             authorization-grant-type: authorization_code # 授权模式（授权码模式）
             redirect-uri: "http://127.0.0.1/login/oauth2/code/gateway" # 回调地址（网关接收授权码）
