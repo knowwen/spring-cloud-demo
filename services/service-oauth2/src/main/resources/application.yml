@@ -16,6 +16,9 @@ spring:
       name: user
       password: password
     oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:8080
       authorizationserver:
         client:
           gateway:
@@ -30,6 +33,7 @@ spring:
                 - "refresh_token"
               redirect-uris:
                 - "http://127.0.0.1/login/oauth2/code/gateway"
+#                - "http://localhost:5173/"
               post-logout-redirect-uris:
                 - "http://127.0.0.1/"
               scopes:

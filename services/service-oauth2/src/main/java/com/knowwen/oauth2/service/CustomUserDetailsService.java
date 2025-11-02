@@ -45,7 +45,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         QueryWrapper<Authorities> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id",userId);
         List<Authorities> authorities = authoritiesService.list(queryWrapper);
-        return authorities.stream()
+        List<SimpleGrantedAuthority> collect = authorities.stream()
                 .map(item -> new SimpleGrantedAuthority(item.getAuthority())).collect(Collectors.toList());
+        collect.add(new SimpleGrantedAuthority("openid"));
+        collect.add(new SimpleGrantedAuthority("profile"));
+        collect.add(new SimpleGrantedAuthority("user"));
+        return collect;
     }
 }

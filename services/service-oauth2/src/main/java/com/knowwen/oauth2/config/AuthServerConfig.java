@@ -51,54 +51,50 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableWebSecurity // 开启 Spring Security 基础功能
 public class AuthServerConfig {
-
-    @Autowired
-    private UserService userService;
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-    // @Bean 
-	// @Order(1)
-	// public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
-	// 		throws Exception {
+     @Bean
+	 @Order(1)
+	 public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
+	 		throws Exception {
 
-	// 	OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-	// 	http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-	// 		.oidc(Customizer.withDefaults());	// Enable OpenID Connect 1.0
-	// 	http
-	// 		// Redirect to the login page when not authenticated from the
-	// 		// authorization endpoint
-	// 		.exceptionHandling((exceptions) -> exceptions
-	// 			.defaultAuthenticationEntryPointFor(
-	// 				new LoginUrlAuthenticationEntryPoint("/login"),
-	// 				new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-	// 			)
-	// 		)
-	// 		// Accept access tokens for User Info and/or Client Registration
-	// 		.oauth2ResourceServer((resourceServer) -> resourceServer
-	// 			.jwt(Customizer.withDefaults()));
+	 	OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+	 	http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+	 		.oidc(Customizer.withDefaults());	// Enable OpenID Connect 1.0
+	 	http
+	 		// Redirect to the login page when not authenticated from the
+	 		// authorization endpoint
+	 		.exceptionHandling((exceptions) -> exceptions
+	 			.defaultAuthenticationEntryPointFor(
+	 				new LoginUrlAuthenticationEntryPoint("/login"),
+	 				new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
+	 			)
+	 		)
+	 		// Accept access tokens for User Info and/or Client Registration
+	 		.oauth2ResourceServer((resourceServer) -> resourceServer
+	 			.jwt(Customizer.withDefaults()));
 
-	// 	return http.build();
-	// }
+	 	return http.build();
+	 }
 
-	// @Bean 
-	// @Order(2)
-	// public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
-	// 		throws Exception {
-	// 	http
-	// 		.authorizeHttpRequests((authorize) -> authorize
-	// 			.requestMatchers("/oauth2/**").permitAll()
-	// 			.anyRequest().authenticated()
-	// 		)
-	// 		// Form login handles the redirect to the login page from the
-	// 		// authorization server filter chain
-	// 		.formLogin(Customizer.withDefaults());
+	 @Bean
+	 @Order(2)
+	 public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
+	 		throws Exception {
+	 	http
+	 		.authorizeHttpRequests((authorize) -> authorize
+	 			.requestMatchers("/login/**", "/error","/.well-known/**").permitAll()
+	 			.anyRequest().authenticated()
+	 		)
+	 		// Form login handles the redirect to the login page from the
+	 		// authorization server filter chain
+	 		.formLogin(Customizer.withDefaults());
 
-	// 	return http.build();
-	// }
+	 	return http.build();
+	 }
 
 //	@Bean
 //	public UserDetailsService userDetailsService() {
