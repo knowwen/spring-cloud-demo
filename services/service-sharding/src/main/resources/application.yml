@@ -1,0 +1,45 @@
+server:
+  port: 8031
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-sharding
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        namespace: ${spring.profiles.active}
+      discovery:
+        namespace: ${spring.profiles.active}
+---
+spring:
+  config:
+    import:
+      # - nacos:db.yml
+      - nacos:shardingsphere-proxy-sharding-db.yml
+    activate:
+      on-profile:
+      - dev
+---
+spring:
+  config:
+    import:
+    - nacos:db.yml
+    activate:
+      on-profile:
+      - test
+---
+spring:
+  config:
+    import:
+    - nacos:db.yml
+    activate:
+      on-profile:
+      - prod

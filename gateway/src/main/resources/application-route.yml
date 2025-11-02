@@ -2,6 +2,20 @@ spring:
   cloud:
     gateway:
       routes:
+      - id: sharding-route
+        uri: lb://service-sharding
+        predicates:
+        - Path=/api/sharding/**
+        filters:
+        - StripPrefix=2
+        - TokenRelay
+      - id: user-read-write-route
+        uri: lb://service-user-read-write
+        predicates:
+        - Path=/api/user/**
+        filters:
+        - StripPrefix=2
+        - TokenRelay
       - id: account-route
         uri: lb://service-account
         predicates:
